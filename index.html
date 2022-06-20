@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XPTO</title>
+    <style>
+        @font-face{
+            font-family: 'josefinsans-bold';
+            src: url(./fonts/JosefinSans-Bold.ttf);
+        }
+
+        @font-face{
+            font-family: 'josefinsans-regular';
+            src: url(./fonts/JosefinSans-Regular.ttf);
+        }
+
+        @font-face{
+            font-family: 'josefinsans-semibold';
+            src: url(./fonts/JosefinSans-SemiBold.ttf);
+        }
+
+        *{
+            color: inherit;
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            text-decoration: none;
+            list-style: none;
+        }
+
+        body{
+            width: 100%;
+            height: fit-content;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .relative{
+            position: relative;
+        }
+
+        .bold{
+            font-family: 'josefinsans-bold';
+        }
+
+        .absolute{
+            position: absolute;
+        }
+
+        .container{
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+        
+        .container-column{
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+        }
+
+        .space-between{
+            justify-content: space-between;
+        }
+
+        .justify-center{
+            justify-content: center;
+        }
+
+        .al-center{
+            align-items: center;
+        }
+
+        .z-index-1{
+            z-index: 1;
+        }
+        
+        .z-index-2{
+            z-index: 2;
+        }
+
+        .z-index-3{
+            z-index: 3;
+        }
+
+        .z-index-4{
+            z-index: 4;
+        }
+        
+        .minw100{
+            width: 100%;
+        }
+
+        .minh100{
+            height: 100%;
+        }
+
+        .top, main{
+            width: 100% !important;
+        }
+
+        .top-content{
+            background-color: #23232e;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
+
+        .top-content > section{
+            height: 4rem;
+            padding-left: 1rem;
+        }
+
+        .title{
+            font-family: 'josefinsans-regular';
+            font-size: 2rem;
+            color: #ffffff;
+            backdrop-filter: blur(4px);
+        }
+
+        @media (min-width: 1440px) {
+            .max-width{
+                max-width: 1440px;
+            }
+        }
+
+        .spacing{
+            height: 3.5rem;
+        }
+
+        main{
+            width: 100vw;
+            height: 100vh;
+        }
+
+        .background{
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .background > img{
+            width: 100%;
+            height: auto;
+            min-height: 100vh;
+        }
+
+        .maxsites{
+            width: 94vw;
+            height: fit-content;
+            padding-bottom: .4rem;
+            overflow-x: scroll;
+        }
+
+        /* scroll */
+        .maxsites::-webkit-scrollbar{
+            height: .6rem;
+        }
+
+        .maxsites::-webkit-scrollbar-thumb{
+            background-color: #f0f0f076;
+            backdrop-filter: blur(4px);
+            
+        }
+
+        .sites{
+            width: 275vw;
+            flex-wrap: nowrap;
+        }
+
+        .sites h2{
+            font-family: 'josefinsans-semibold';
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .sites h3{
+            font-family: 'josefinsans-semibold';
+            width: 100%;
+            font-size: 1.2vw;
+            margin-bottom: .4vw;
+        }
+
+        .sites p{
+            font-size: .8vw;
+            font-family: 'josefinsans-regular';
+            margin-bottom: 0.2rem;
+        }
+
+        .sites a{
+            font-size: .8vw;
+            font-family: 'josefinsans-semibold';
+            color: #2e0058;
+            margin-bottom: 1.4rem;
+        }
+
+        .sites img{
+            position: absolute;
+            width: auto;
+            height: 100%;
+            max-height: 32%;
+            max-width: 85%;
+            bottom: .6rem;
+            left: .6rem;
+        }
+
+        .sites div:nth-child(1) td{
+            border-top: 6px solid #06acff;
+        }
+
+        .sites div:nth-child(2) td{
+            border-top: 6px solid #ff069b;
+        }
+
+        .sites div:nth-child(3) td{
+            border-top: 6px solid #020045;
+        }
+
+        .sites div:nth-child(4) td{
+            border-top: 6px solid #c300ff;
+        }
+
+        .bgblack{
+            background-color: #272727b2;
+            width: fit-content;
+            height: fit-content;
+            backdrop-filter: blur(4px);
+        }
+
+        .sites tr{
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+
+        .sites td{
+            position: relative;            
+            display: flex;
+            flex-direction: column;
+            width: 19%;
+            padding: .6rem .6rem;
+            background-color: #e1e1e1;
+            box-shadow: 4px 4px 4px #00000040;
+            backdrop-filter: blur(4px);
+            margin-right: 1%;
+            margin-bottom: 1rem;
+            height: 12vw;
+        }
+
+        .sites div{
+            width: 67vw !important;
+            margin-right: 2rem;
+            padding: 2rem;
+            background-color: #f0f0f0bc;
+            box-shadow: 4px 4px 4px #00000040;
+            backdrop-filter: blur(20px);
+        }
+
+        .sites table, .sites tr{
+            width: 100%;
+        }
+    </style>
+</head>
+<body class="container-column relative">
+    <div class="top container-column absolute z-index-2">
+        <div class="container minw100 minh100 justify-center">
+            <div class="top-content container space-between">
+                <section class="container-column justify-center">
+                    <div class="title">XPTO Corporation</div>
+                </section>
+            </div>
+        </div>
+    </div>
+    <main class="relative container-column justify-center z-index-1">
+        <div class="spacing"></div>
+        <div class="relative z-index-4 minw100 container-column al-center">
+            <div class="maxsites">
+                <section class="sites container al-center">
+                    <div>
+                        <h2>INFO<span>A</span></h2>
+                        <table>
+                            <tr>
+                                <td>
+                                    <h3>PsicoTEC</h3>
+                                    <p><span class="bold">Empresa: </span>Psicotec</p>
+                                    <a href="">Acessar site</a>
+                                    <img src="./images/psicotec-logo.png" alt="logo">
+                                </td>
+                                <td>
+                                    <h3>FastBurguer</h3>
+                                    <p><span class="bold">Empresa: </span>Magnatas</p>
+                                    <a href="">Acessar site</a>
+                                    <img src="./images/burg-logo.svg" alt="logo">
+                                </td>
+                                <td>
+                                    <h3>Laura Santos Nutricionista</h3>
+                                    <p><span class="bold">Empresa: </span>ThunderTech</p>
+                                    <a href="">Acessar site</a>
+                                    <img src="./images/nutri-logo.svg" alt="logo">
+                                </td>
+                                <td>
+                                    <h3>Elevantus</h3>
+                                    <p><span class="bold">Empresa: </span>Elevantus</p>
+                                    <a href="">Acessar site</a>
+                                    <img src="./images/elevan-logo.png" alt="logo">
+                                </td>
+                                <td>
+                                    <h3>Scammers Painting</h3>
+                                    <p><span class="bold">Empresa: </span>Scammers</p>
+                                    <a href="">Acessar site</a>
+                                    <img src="./images/sscam-logo.svg" alt="logo">
+                                </td>
+                                <td>
+                                    <h3>J.A. Maquiagem Profissional</h3>
+                                    <p><span class="bold">Empresa: </span>JJK</p>
+                                    <a href="">Acessar site</a>
+                                    <img src="./images/" alt="logo">
+                                </td>
+                                <td>
+                                    <h3>Plus Burguer</h3>
+                                    <p><span class="bold">Empresa: </span>ProductionTech</p>
+                                    <a href="">Acessar site</a>
+                                    <img src="./images/plus.svg" alt="logo">
+                                </td>
+                                <td>
+                                    <h3>Pet Companhia</h3>
+                                    <p><span class="bold">Empresa: </span>WebPetz</p>
+                                    <a href="">Acessar site</a>
+                                    <img src="./images/petcomp.svg" alt="logo">
+                                </td>
+                                <td>
+                                    <h3>Oficina do Celular</h3>
+                                    <p><span class="bold">Empresa: </span>Tech Revolution</p>
+                                    <a href="">Acessar site</a>
+                                    <img src="./images/ofci-logo.svg" alt="logo">
+                                </td>
+                                <td>
+                                    <h3>Arte e Sabor Doceria</h3>
+                                    <p><span class="bold">Empresa: </span>Revolucionarios</p>
+                                    <a href="">Acessar site</a>
+                                    <img src="./images/artdoc-log.svg" alt="logo">
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div>
+                        <h2>INFO<span>B</span></h2>
+                        <table>
+                            <tr>
+                                <td>
+                                    <h3>Optima</h3>
+                                    <p><span class="bold">Empresa: </span>PCF</p>
+                                    <a href="">Acessar site</a>
+                                    <img src="./images/opti.svg" alt="logo">
+                                </td>
+                                <td>
+                                    <h3>Ame Mais</h3>
+                                    <p><span class="bold">Empresa: </span>Tigers</p>
+                                    <a href="">Acessar site</a>
+                                    <img src="./images/ame.svg" alt="logo">
+                                </td>
+                                <td>
+                                    <h3>Saúde Mental</h3>
+                                    <p><span class="bold">Empresa: </span>T.I.J.M.</p>
+                                    <a href="">Acessar site</a>
+                                    <img src="./images/saum.svg" alt="logo">
+                                </td>
+                                <td>
+                                    <h3>Nutrifit</h3>
+                                    <p><span class="bold">Empresa: </span>Nutrifit</p>
+                                    <a href="">Acessar site</a>
+                                    <img src="./images/nutrifi.svg" alt="logo">
+                                </td>
+                                <td>
+                                    <h3>Odonto Tooth's</h3>
+                                    <p><span class="bold">Empresa: </span>S.O.S LLER</p>
+                                    <a href="">Acessar site</a>
+                                    <img src="./images/odonto.svg" alt="logo">
+                                </td>
+                                <td>
+                                    <h3>Up Beat Design</h3>
+                                    <p><span class="bold">Empresa: </span>UpBeat Design</p>
+                                    <a href="">Acessar site</a>
+                                    <img src="./images/up.svg" alt="logo">
+                                </td>
+                                <td>
+                                    <h3>Sigma</h3>
+                                    <p><span class="bold">Empresa: </span>Sigma</p>
+                                    <a href="">Acessar site</a>
+                                    <img src="./images/sigma.svg" alt="logo">
+                                </td>
+                                <td>
+                                    <h3>Evolution</h3>
+                                    <p><span class="bold">Empresa: </span>Evolution</p>
+                                    <a href="">Acessar site</a>
+                                    <img src="./images/evo.svg" alt="logo">
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div>
+                        <h2>INFO<span>C</span></h2>
+                        <table>
+                            <tr>
+                                <td>
+                                    <h3>FLUX</h3>
+                                    <p><span class="bold">Empresa: </span>FLUX</p>
+                                    <a href="">Acessar site</a>
+                                    <img src="./images/flux-logo.svg" alt="logo">
+                                </td>
+                                <td>
+                                    <h3>Oliver's Restaurant</h3>
+                                    <p><span class="bold">Empresa: </span>Oliver's</p>
+                                    <a href="">Acessar site</a>
+                                    <img src="./images/oliver.svg" alt="logo">
+                                </td>
+                                <td>
+                                    <h3>PETGUARDIAN</h3>
+                                    <p><span class="bold">Empresa: </span>BITCODE</p>
+                                    <a href="">Acessar site</a>
+                                    <img src="./images/pet.svg" alt="logo">
+                                </td>
+                                <td>
+                                    <h3>Estufa de Ouro</h3>
+                                    <p><span class="bold">Empresa: </span>Projeto EDO</p>
+                                    <a href="">Acessar site</a>
+                                    <img src="./images/funi.svg" alt="logo">
+                                </td>
+                                <td>
+                                    <h3>Fast Car</h3>
+                                    <p><span class="bold">Empresa: </span>Nirvana</p>
+                                    <a href="">Acessar site</a>
+                                    <img src="./images/fast.svg" alt="logo">
+                                </td>
+                                <td>
+                                    <h3>Dental Hioki</h3>
+                                    <p><span class="bold">Empresa: </span>Hioki</p>
+                                    <a href="">Acessar site</a>
+                                    <img src="./images/dent.svg" alt="logo">
+                                </td>
+                                <td>
+                                    <h3>Art Maac's Artesanato</h3>
+                                    <p><span class="bold">Empresa: </span>Art Maac's</p>
+                                    <a href="">Acessar site</a>
+                                    <img src="./images/art.svg" alt="logo">
+                                </td>
+                                <td>
+                                    <h3>Art Attack</h3>
+                                    <p><span class="bold">Empresa: </span>Art Attack</p>
+                                    <a href="">Acessar site</a>
+                                    <img src="./images/artatt.svg" alt="logo">
+                                </td>
+                                <td>
+                                    <h3>Quikly Pizza</h3>
+                                    <p><span class="bold">Empresa: </span>Quickly</p>
+                                    <a href="">Acessar site</a>
+                                    <img src="./images/quickly.svg" alt="logo">
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div>
+                        <h2>INFO<span>D</span></h2>
+                        <table>
+                            <tr>
+                                <td>
+                                    <h3>Green Valley</h3>
+                                    <p><span class="bold">Empresa: </span>Trindade</p>
+                                    <a href="">Acessar site</a>
+                                    <img src="./images/valley.svg" alt="logo">
+                                </td>
+                                <td>
+                                    <h3>Roses Psicologia</h3>
+                                    <p><span class="bold">Empresa: </span>Roses</p>
+                                    <a href="">Acessar site</a>
+                                    <img src="./images/roses.svg" alt="logo">
+                                </td>
+                                <td>
+                                    <h3>The Power</h3>
+                                    <p><span class="bold">Empresa: </span>Marcearia Power</p>
+                                    <a href="">Acessar site</a>
+                                    <img src="./images/marce.svg" alt="logo">
+                                </td>
+                                <td>
+                                    <h3>Meireles Nutricionista</h3>
+                                    <p><span class="bold">Empresa: </span>Black Diamonds</p>
+                                    <a href="">Acessar site</a>
+                                    <img src="./images/meireles.svg" alt="logo">
+                                </td>
+                                <td>
+                                    <h3>Dr. Esmeraldo Psicólogo</h3>
+                                    <p><span class="bold">Empresa: </span>Binary Code</p>
+                                    <a href="">Acessar site</a>
+                                    <img src="./images/esme.svg" alt="logo">
+                                </td>
+                                <td>
+                                    <h3>Dental Clinic</h3>
+                                    <p><span class="bold">Empresa: </span>Hunters</p>
+                                    <a href="">Acessar site</a>
+                                    <img src="./images/dentcli.svg" alt="logo">
+                                </td>
+                                <td>
+                                    <h3>Hamburguers e Cia</h3>
+                                    <p><span class="bold">Empresa: </span>Hamburguers e Cia</p>
+                                    <a href="">Acessar site</a>
+                                    <img src="./images/hamcia.svg" alt="logo">
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <div class="background absolute z-index-3"><img class="" src="./images/background.jpg" alt="background"></div>
+    </main>
+</body>
+</html>
